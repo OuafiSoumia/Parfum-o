@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { advantage } from "../models/assets";
+import { PerfumeType } from "@/types/Perfume";
+
 export default function HomePage() {
   const router = useRouter();
-  const [perfumes, setPerfumes] = useState([]);
+  const [perfumes, setPerfumes] = useState<PerfumeType[]>([]);
 
   useEffect(() => {
     fetch("/api/perfumes")
@@ -61,10 +63,11 @@ export default function HomePage() {
           style={{ display: "flex" }}
         >
           {perfumes.map((p, i) => {
-            // Calcul du prix le plus bas
-            const lowestPriceObj = p.prices.reduce((min, current) => {
-              return current.price < min.price ? current : min;
-            }, p.prices[0]);
+            if (!p.prices || p.prices.length === 0) return null;
+
+            const lowestPrice = p.prices.reduce((min, curr) =>
+              curr.price < min.price ? curr : min
+            );
 
             return (
               <motion.div
@@ -82,7 +85,7 @@ export default function HomePage() {
                   <p className="text-gray-600 text-sm mt-1">
                     lowest Price:{" "}
                     <span className="text-rose-600 font-semibold">
-                      ${lowestPriceObj.price} ({lowestPriceObj.site})
+                      ${lowestPrice.price} ({lowestPrice.site})
                     </span>
                     <br />
                     {p.notes.map((note: string, idx: number) => (
