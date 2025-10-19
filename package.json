@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2",
+    "tsconfig-paths": "^4.2.0"
+  },
+  "dependencies": {
+    "cloudinary": "^2.7.0",
+    "multer": "^2.0.2",
+    "swr": "^2.3.6"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --write ."
+  }
+}
