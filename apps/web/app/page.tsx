@@ -66,7 +66,7 @@ export default function HomePage() {
             if (!p.prices || p.prices.length === 0) return null;
 
             const lowestPrice = p.prices.reduce((min, curr) =>
-              curr.price < min.price ? curr : min
+              curr.price < min.price ? curr : min,
             );
 
             return (
@@ -88,7 +88,7 @@ export default function HomePage() {
                       ${lowestPrice.price} ({lowestPrice.site})
                     </span>
                     <br />
-                    {p.notes.map((note: string, idx: number) => (
+                    {p.notes?.map((note: string, idx: number) => (
                       <span
                         key={idx}
                         className="text-xs mr-2 px-2 py-1 bg-rose-200 rounded-full"
