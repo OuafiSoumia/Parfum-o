@@ -1,8 +1,9 @@
 "use client";
+import { PerfumeType } from "@/types/Perfume";
 import { useEffect, useState } from "react";
 
 export default function PerfumesPage() {
-  const [perfumes, setPerfumes] = useState<any[]>([]);
+const [perfumes, setPerfumes] = useState<PerfumeType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
