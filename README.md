@@ -41,3 +41,11 @@ cd apps/web --- yarn build : pour tester le build
 supprime le fichier du build: npx rimraf .next
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+probleme de deployement fixer par le changement dans le fichier vercel.json de la ligne:
+"builds": [{"src": "apps/web/package.json", "use": "@vercel/next"}]
+par cette ligne:
+"builds": [{ "src": "package.json", "use": "@vercel/next" }],
+
+probleme 2: acces to mongodb local avec vercel -- faut utiliser mongo atlas en ligne 
+
