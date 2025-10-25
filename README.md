@@ -17,7 +17,6 @@ bun dev
 ```
 
 pour seeder la db : cd apps/web/scripts : npx ts-node seed.ts
-formater un fichier : npx prettier --write src/App.tsx
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -37,10 +36,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*************************************astuces*******************************
 cd apps/web --- yarn build : pour tester le build
 supprime le fichier du build: npx rimraf .next
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+formater un fichier : npx prettier --write src/App.tsx
 
 probleme de deployement fixer par le changement dans le fichier vercel.json de la ligne:
 "builds": [{"src": "apps/web/package.json", "use": "@vercel/next"}]
@@ -48,4 +50,7 @@ par cette ligne:
 "builds": [{ "src": "package.json", "use": "@vercel/next" }],
 
 probleme 2: acces to mongodb local avec vercel -- faut utiliser mongo atlas en ligne 
+
+net start MongoDB 
+Le service MongoDB Server (MongoDB) a démarré.   
 
