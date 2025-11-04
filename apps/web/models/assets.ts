@@ -1,3 +1,10 @@
+export const navItems = [
+  { name: "Accueil", href: "#accueil" },
+  { name: "parfums", href: "#parfums" },
+  { name: "Ingrédients", href: "#ingrédients" },
+  { name: "À propos", href: "#apropos" },
+];
+
 export const advantage = [
   {
     icon: "🌍",

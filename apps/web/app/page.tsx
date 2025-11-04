@@ -3,8 +3,9 @@
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ingredients } from "../models/assets";
+import { ingredients, navItems } from "../models/assets";
 import { PerfumeType } from "@/types/Perfume";
+import { FindYourPerfumeSection } from "./components/FindYourPerfumeSection";
 
 export default function HomePage() {
   const router = useRouter();
@@ -20,10 +21,37 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-rose-50 to-white text-gray-800">
+      <motion.nav
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-rose-100 shadow-sm"
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+          <a
+            href="/"
+            className="text-2xl font-bold text-rose-600 hover:text-rose-700"
+          >
+            Parfuméo
+          </a>
+
+          <div className="flex items-center space-x-6">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`text-sm font-medium transition`}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </motion.nav>
       <div className="relative w-full h-screen overflow-hidden">
         <iframe
           title="video-banner"
-          id="vimeoPlayer"
+          id="accueil"
           className="absolute top-0 left-0 w-full h-full object-cover"
           src="https://player.vimeo.com/video/935815682?autoplay=1&controls=0&muted=1&loop=1&title=0&portrait=0&pip=0&byline=0&background=1"
           allow="autoplay; picture-in-picture"
@@ -47,7 +75,7 @@ export default function HomePage() {
       </div>
 
       <section
-        id="featured"
+        id="parfums"
         className="h-screen py-16 px-6 bg-white text-center"
       >
         <h2 className="text-3xl font-semibold text-rose-700 mb-2">
@@ -102,61 +130,11 @@ export default function HomePage() {
           })}
         </div>
       </section>
-      <div className="w-full mx-auto my-20 md:my-40">
-        <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-12 gap-x-3 sm:gap-x-5">
-          <div className="col-span-full md:col-span-6 md:col-start-4 flex flex-col items-center gap-3 text-center">
-            <h2 className="text-h2Mobile md:text-h2 font-secondary max-w-[300px] sm:max-w-none">
-              Ingrédients
-            </h2>
-            <p className="text-18 font-light mx-6 md:mx-0">
-              Consultez les caractéristiques de plus de 1544 ingrédients et
-              découvrez les parfums dans lesquels ils sont présents.
-            </p>
-          </div>
-
-          <div className="col-span-full lg:pt-12 lg:pb-10 px-8 lg:px-0">
-            <div
-              className="flex gap-6 overflow-x-auto overflow-y-hidden hide-scrollbar"
-              style={{ justifyContent: "center" }}
-            >
-              {ingredients.map((ing, index) => (
-                <a
-                  key={index}
-                  href={`/fr/ingredients/${ing.name}`}
-                  className="flex flex-col items-center min-w-[6rem] hover:cursor-pointer"
-                >
-                  <div className="aspect-square w-24 h-24 overflow-hidden rounded-full border border-gray-500 mb-2 bg-[#f7f5f4]">
-                    <picture>
-                      <img
-                        src={ing.image}
-                        alt={ing.name}
-                        className="w-full h-full object-cover rounded-full"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </picture>
-                  </div>
-                  <span className="text-base text-black text-center truncate w-24">
-                    {ing.name}
-                  </span>
-                </a>
-              ))}
-            </div>
-
-            {/* Lien "Explorer le catalogue" centré */}
-            <div className="col-span-full md:col-span-6 md:col-start-4 flex flex-col items-center gap-3 text-center mt-6">
-              <a
-                href="/fr/ingredients/"
-                className="text-gold800 hover:text-gold600 underline underline-offset-[0.2rem] text-hrefLarge uppercase"
-              >
-                Explorer le catalogue
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <section className="h-screen relative bg-white overflow-hidden py-20">
+      <FindYourPerfumeSection />
+      <section
+        id="apropos"
+        className="h-screen relative bg-white overflow-hidden py-20"
+      >
         {/* Image gauche */}
         <div className="hidden lg:block lg:absolute -bottom-10 left-0 w-[300px]">
           <div className="h-[55vh] xl:h-[70vh] overflow-hidden">
