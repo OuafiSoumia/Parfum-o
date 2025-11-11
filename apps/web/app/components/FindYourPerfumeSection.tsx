@@ -22,6 +22,10 @@ export function FindYourPerfumeSection() {
       const res = await fetch(
         `/api/recommend?notes=${selectedNotes.join(",")}`,
       );
+      if (!res.ok) {
+        console.log("Erreur serveur détectée");
+        return;
+      }
       const data = await res.json();
       setSuggestion(data);
     } finally {
@@ -88,7 +92,7 @@ export function FindYourPerfumeSection() {
         {loading ? "Recherche en cours..." : "Trouver mon parfum"}
       </button>
 
-      {suggestion && (
+      {suggestion ? (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,7 +127,7 @@ export function FindYourPerfumeSection() {
             Voir l'offre
           </a>
         </motion.div>
-      )}
+      ) : <p className="mt-6 text-gray-500">Aucune suggestion pour le moment.</p>}
     </section>
   );
 }

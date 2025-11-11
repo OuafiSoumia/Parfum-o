@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     const products = await Perfume.find({ notes: { $in: notes } }).limit(1);
 
     if (!products || products.length === 0) {
-      return NextResponse.json({ message: "Aucun parfum trouvé" }, { status: 200 });
+      return NextResponse.json({ message: "Aucun parfum trouvé" }, { status: 404 });
     }
 
     const product = products[0];
